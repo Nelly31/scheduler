@@ -13,13 +13,13 @@ return <InterviewerListItem
   avatar = {interviewer.avatar} 
   alt = {interviewer.name} 
   selected = {interviewer.id === props.value}
-  setInterviewer = {(event) => interviewer.onChange(interviewer.id)}/>
+  setInterviewer = {(event) => props.onChange(interviewer.id)}/>
 })
 
 return  (
-  <section class="interviewers">
-  <h4 class="interviewers__header text--light">Interviewer</h4>
-  <ul class="interviewers__list">{interviewerList}</ul>
+  <section className="interviewers">
+  <h4 className="interviewers__header text--light">Interviewer</h4>
+  <ul className="interviewers__list">{interviewerList}</ul>
   </section>
   );
 }

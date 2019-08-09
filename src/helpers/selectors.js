@@ -23,6 +23,30 @@ export function getAppointmentsForDay(state, day) {
 }
 
 
+export function getInterviewersForDay(state, day) {
+
+  let intArray = [];
+
+  for (let item of state.days) {
+    if (item.name === day) {
+      intArray = item.interviewers
+    }
+  }
+
+  let result = [];
+
+  for (let interviewerId of intArray) {
+
+    for (let key in state.interviewers) {
+      if (interviewerId === state.interviewers[key].id) {
+        result.push((state.interviewers[key]))
+      }
+    }
+  }
+  return result;
+}
+
+
 
 export function getInterview(state, interview) {
 
