@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useReducer } from "react";
 import axios from "axios";
 
 export function useApplicationData(initial) {
@@ -19,7 +19,7 @@ export function useApplicationData(initial) {
     day: "Monday",
     days: [],
     appointments: {},
-    interviewers:{}
+    interviewers: {}
   });
 
   //setDay
@@ -27,59 +27,94 @@ export function useApplicationData(initial) {
 
   //bookInterview
   //add a new interview obj for the set appointment id
-  const bookInterview = function(id, interview) {
-    console.log("BOOKING APPT")
+  const bookInterview = function (id, interview) {
+
+    //function to update the relevant day obj in the day array. 
+    function updateObjectInArray(days, id) {
+      
+      return days.map(day => {
+        if (day.appointments.includes(id)) {
+          day.spots = day.spots - 1
+        }
+      
+        return {  
+          ...days,
+          ...day,
+        }
+      })
+      
+    }
+
+    const appointment = {
+      ...state.appointments[id],
+      interview: { ...interview },
+    };
+
+    const newDays = updateObjectInArray(state.days, id)
+
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment
+    };
+
+    return axios.put(`http://localhost:3001/api/appointments/${id}`, {
+      interview,
+    })
+      .then(() => {
+        setState({
+          ...state,
+          appointments,
+          days: newDays
+        })
+      })
+
+  };
+
+  //Delete Interview
+  const deleteInterview = function (id, interview) {
+    function updateObjectInArray(days, id) {
+      
+      return days.map(day => {
+        if (day.appointments.includes(id)) {
+          day.spots = day.spots + 1
+        }
+      
+        return {  
+          ...days,
+          ...day,
+        }
+      })
+      
+    }
 
     const appointment = {
       ...state.appointments[id],
       interview: { ...interview }
     };
 
+    const newDays = updateObjectInArray(state.days, id)
+
     const appointments = {
       ...state.appointments,
       [id]: appointment
     };
-  
-     return axios.put(`http://localhost:3001/api/appointments/${id}`, {
+
+    return axios.delete(`http://localhost:3001/api/appointments/${id}`, {
       interview,
-    }) 
-      .then(() => {
-        setState({
-          ...state,
-          appointments
-        })
-    })
-
-  };
-
-  //Delete Interview
-  const deleteInterview = function(id, interview) {
-
-    const appointment = {
-      ...state.appointments[id],
-      interview: {...interview}
-    };
-
-    const appointments = {
-      ...state.appointments,
-      [id]: appointment
-    };
-  
-     return axios.delete(`http://localhost:3001/api/appointments/${id}` ,{ 
-       interview,
     })
       .then(() => {
         setState({
           ...state,
-          appointments
+          appointments,
+          days: newDays
         })
-    })
+      })
   };
 
   return {
-    state, 
-    setDay, 
-    bookInterview, 
-    deleteInterview, 
+    state,
+    setDay,
+    bookInterview,
+    deleteInterview,
   }
 }
