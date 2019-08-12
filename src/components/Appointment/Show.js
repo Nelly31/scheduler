@@ -24,7 +24,6 @@ export default function Show(props) {
             interview={interview}
             className="appointment__actions-button"
             src="images/edit.png" onClick={(event) => {
-              console.log(student)
               console.log(interviewer.name)
               props.onEdit(student, interviewer.name) 
             }}

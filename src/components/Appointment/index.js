@@ -33,18 +33,22 @@ export default function Appointment(props) {
 
     transition(SAVING)
 
-    props.bookInterview(props.id, interview).then(() => transition(SHOW)).catch(()=> transition(ERROR_SAVING, true))
+    props.bookInterview(props.id, interview)
+    .then(() => transition(SHOW))
+    .catch(()=> transition(ERROR_SAVING, true))
   }
 
   const editing = function (name, interviewer) {
     const interview = {
-      student: props.name,
-      interviewer: props.interviewer
+      student: name,
+      interviewer: interviewer
     };
 
-    transition(EDIT)
+    transition(SAVING)
 
-    props.bookInterview(props.id, interview).then((name, interviewer) => save(name, interviewer))
+    props.editInterview(props.id, interview)
+    .then(() => transition(SHOW))
+    .catch(()=> transition(ERROR_SAVING, true))
   }
 
   const deleting = function (name, interviewer) {
@@ -56,7 +60,8 @@ export default function Appointment(props) {
     transition(DELETING)
 
     props.deleteInterview(props.id, interview)
-      .then(() => transition(EMPTY)).catch(() => transition(ERROR_DELETING, true))
+      .then(() => transition(EMPTY))
+      .catch(() => transition(ERROR_DELETING, true))
   }
 
   return (
@@ -73,7 +78,7 @@ export default function Appointment(props) {
           name={props.interview.student}
           interviewer={props.interview.interviewer}
           onDelete={() => transition(CONFIRM)}
-          onEdit={editing}
+          onEdit={() => transition(EDIT)}
         />
       )}
 
@@ -95,7 +100,7 @@ export default function Appointment(props) {
           interviewer={props.interview.interviewer.id}
           interviewers={props.interviewers}
           onCancel={() => back()}
-          onSave={save}
+          onSave={editing}
         />
       )}
 

@@ -70,6 +70,32 @@ export function useApplicationData(initial) {
 
   };
 
+//edit Interview 
+
+const editInterview = function (id, interview) {
+
+  const appointment = {
+    ...state.appointments[id],
+    interview: { ...interview },
+  };
+
+  const appointments = {
+    ...state.appointments,
+    [id]: appointment
+  };
+
+  return axios.put(`http://localhost:3001/api/appointments/${id}`, {
+    interview,
+  })
+    .then(() => {
+      setState({
+        ...state,
+        appointments
+      })
+    })
+
+};
+
   //Delete Interview
   const deleteInterview = function (id, interview) {
     function updateObjectInArray(days, id) {
@@ -116,5 +142,6 @@ export function useApplicationData(initial) {
     setDay,
     bookInterview,
     deleteInterview,
+    editInterview
   }
 }

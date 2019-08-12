@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from 'prop-types';
 
 import InterviewerListItem from "./InterviewerListItem"
 
@@ -9,6 +10,7 @@ export default function InterviewerList(props) {
 let interviewerList = props.interviewers.map((interviewer) => {
 
 return <InterviewerListItem 
+  id = {interviewer.id}
   name = {interviewer.name} 
   avatar = {interviewer.avatar} 
   alt = {interviewer.name} 
@@ -23,6 +25,14 @@ return  (
   </section>
   );
 }
+
+
+InterviewerList.propTypes = {
+// ensure value props is number
+value: PropTypes.number,
+// ensure onChange prop is function
+onChange: PropTypes.func.isRequired
+} 
 
 
 
