@@ -10,7 +10,7 @@ export default function InterviewerList(props) {
 let interviewerList = props.interviewers.map((interviewer) => {
 
 return <InterviewerListItem 
-  id = {interviewer.id}
+  key = {interviewer.id}
   name = {interviewer.name} 
   avatar = {interviewer.avatar} 
   alt = {interviewer.name} 

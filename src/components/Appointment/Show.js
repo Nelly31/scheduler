@@ -8,7 +8,7 @@ export default function Show(props) {
   const [interview, setInterview] = useState(props.interview || null) 
 
   return (
-    <main className="appointment__card appointment__card--show">
+    <main className="appointment__card appointment__card--show" data-testid="appointment" >
       <section className="appointment__card-left">
         <h2 className="text--regular">{student}</h2>
         <section className="interviewer">

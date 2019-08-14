@@ -10,6 +10,7 @@ import Error from 'components/Appointment/Error.js'
 import Status from 'components/Appointment/Status.js'
 import { useVisualMode } from 'hooks/useVisualMode.js'
 import { typeParameterInstantiation } from "@babel/types";
+import { resetWarningCache } from "prop-types";
 
 
 export default function Appointment(props) {
@@ -65,7 +66,8 @@ export default function Appointment(props) {
   }
 
   return (
-    <React.Fragment>
+    <article 
+    data-testid="appointment">
       <Header
         time={props.time}
       />
@@ -74,7 +76,8 @@ export default function Appointment(props) {
       )}
 
       {mode === SHOW && (
-        <Show
+        <Show 
+          // data-testid="appointment"
           name={props.interview.student}
           interviewer={props.interview.interviewer}
           onDelete={() => transition(CONFIRM)}
@@ -84,6 +87,7 @@ export default function Appointment(props) {
 
       {mode === CREATE && (
         <Form
+          // data-testid="appointment"
           name={props.student}
           student={props.student}
           interviewer={props.interviewer}
@@ -131,6 +135,6 @@ export default function Appointment(props) {
       {mode === DELETING && (
         <Status message="DELETING" />
       )}
-    </React.Fragment>
+    </article>
   )
 }
