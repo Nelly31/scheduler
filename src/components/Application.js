@@ -4,9 +4,9 @@ import "components/Application.scss";
 
 import DayList from "components/DayList.js";
 import Appointment from "components/Appointment"
-import { tsPropertySignature } from "@babel/types";
+// import { tsPropertySignature } from "@babel/types";
 import { getAppointmentsForDay, getInterview, getInterviewersForDay } from "helpers/selectors";
-import { useVisualMode } from "hooks/useVisualMode"
+// import { useVisualMode } from "hooks/useVisualMode"
 import {useApplicationData} from "hooks/useApplicationData"
 
 export default function Application(props) {

@@ -6,7 +6,7 @@ import Button from "components/Button.js";
 export default function Form(props) {
   const [student, setName] = useState(props.name || "");
   const [interviewer, setInterviewer] = useState(props.interviewer || null);
-  const [interview, setInterview] = useState(props.interview || null);
+  const [interview] = useState(props.interview || null);
   const [error, setError] = useState("");
 
   const reset = () => {

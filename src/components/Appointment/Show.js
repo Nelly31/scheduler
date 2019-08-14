@@ -3,9 +3,9 @@ import "components/Appointment/style.scss";
 
 export default function Show(props) {
 
-  const [student, setName] = useState(props.name || "");
-  const [interviewer, setInterviewer] = useState(props.interviewer || null);
-  const [interview, setInterview] = useState(props.interview || null) 
+  const [student] = useState(props.name || "");
+  const [interviewer] = useState(props.interviewer || null);
+  const [interview] = useState(props.interview || null) 
 
   return (
     <main className="appointment__card appointment__card--show" data-testid="appointment" >

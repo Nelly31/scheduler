@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useReducer } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 export function useApplicationData(initial) {
@@ -8,7 +8,6 @@ export function useApplicationData(initial) {
       axios.get('/api/appointments'),
       axios.get('/api/interviewers')
     ]).then((all) => {
-      console.log(all)
       const [daysResult, apptResult, interviewersResult] = all;
       setState(prev => ({ ...prev, days: daysResult.data, appointments: apptResult.data, interviewers: interviewersResult.data }))
     })
