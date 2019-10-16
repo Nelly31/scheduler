@@ -2,9 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/node:10.16
-
-    working_directory: ~/client
+      - image: circleci/node:8.9.4
 
     steps:
       - checkout
@@ -22,8 +20,6 @@ jobs:
   deploy:
   machine:
     enabled: true
-
-  working_directory: ~/client
 
   steps:
     - add_ssh_keys:
