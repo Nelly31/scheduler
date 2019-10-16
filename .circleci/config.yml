@@ -33,7 +33,7 @@ jobs:
     - run:
         name: Push Master to Production
         command: |
-          git push https://github.com/Nelly31/scheduler master:production
+          git push https://github.com/Nelly31/scheduler.git master:production
   
 workflows:
   version: 2
