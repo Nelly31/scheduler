@@ -23,7 +23,7 @@ jobs:
   machine:
     enabled: true
 
-  working_directory: ~/client
+  working_directory: ~/src
 
   steps:
     - add_ssh_keys:
